@@ -82,49 +82,55 @@ public class SnackVendingMachineApplicationTest {
 
     }
 
-    //coin test
+    /**
+     * This test will test most payWithCoin/notes scenarios,it will consider coin_payment
+     * file((in resources) as an input to scanner,so instead of require console input
+     * from user,it will read them form the file.
+     *
+     * @throws FileNotFoundException
+     */
     @Test
     public void payWithCoinTest() throws FileNotFoundException {
         snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("coin_paymet.txt").getPath()
         )));
 
-        //success payment with coin,no change,all valid money
+        //case1 :successful payment with money no change returned,all entered money are accepted.
+        //each time the test validate moneyStore,change returned,snack updated quantity.
         Snack selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertTrue(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=17, 0.1=3, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertTrue(snackVendingMachine.getMoneyController().getTotalChangeMap().size() == 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //success payment,no suuficent change,un accepted money
+        //case2 :unsuccessful payment with no sufficient change ,not all entered money are accepted.
         selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertFalse(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=17, 0.1=3, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertTrue(snackVendingMachine.getMoneyController().getTotalChangeMap().size() == 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //success payment,suficent change,all ccepted money
+        //case3:successful payment with sufficient change all entered money are accepted.
         selectedSnack = snackVendingMachine.selectItemAtSlot(14);
         assertTrue(snackVendingMachine.execute(14, selectedSnack.getPrice()));
-
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=9, 0.1=1, 50.0=2}");
         Assert.assertEquals(snackVendingMachine.getMoneyController().getTotalChangeMap().toString(), "{1.0=8, 0.1=2, 0.2=1, 20.0=2}");
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //not enough payment then cancel
+        //case4:unsuccessful payment,Not enough entered money,then user cancel the operation.
         selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertFalse(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=9, 0.1=1, 50.0=2}");
         Assert.assertTrue(snackVendingMachine.getMoneyController().getTotalChangeMap().size() == 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //not enough payment then correct
+        //case5:successful payment,Not enough entered money,then user insert coin again.
         selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertTrue(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=11, 0.1=3, 50.0=2}");
         Assert.assertTrue(snackVendingMachine.getMoneyController().getTotalChangeMap().size() == 0);
         assertTrue(selectedSnack.getQuantity() == 3);
 
-        //not enough payment then credit
+        //case6:successful payment,Not enough entered money,then user choose another payment method(card).
         selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertTrue(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=11, 0.1=3, 50.0=2}");
@@ -133,6 +139,13 @@ public class SnackVendingMachineApplicationTest {
 
     }
 
+    /**
+     * This test will test most snack soldOut scenarios,it will consider sold_out
+     * file((in resources) as an input to scanner,so instead of require console input
+     * from user,it will read them form the file.
+     *
+     * @throws FileNotFoundException
+     */
     @Test
     public void soldOutTest() throws FileNotFoundException {
         snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("sold_out.txt").getPath()
@@ -141,12 +154,10 @@ public class SnackVendingMachineApplicationTest {
         assertTrue(snackVendingMachine.execute(6, selectedSnack.getPrice()));
         assertTrue(selectedSnack.getQuantity() == 1);
 
-        //not  sufficent change
         selectedSnack = snackVendingMachine.selectItemAtSlot(6);
         assertFalse(snackVendingMachine.execute(6, selectedSnack.getPrice()));
         assertTrue(selectedSnack.getQuantity() == 1);
 
-        //not enough payment then credit
         selectedSnack = snackVendingMachine.selectItemAtSlot(6);
         assertTrue(snackVendingMachine.execute(6, selectedSnack.getPrice()));
         assertTrue(selectedSnack.getQuantity() == 0);
