@@ -1,6 +1,7 @@
 package com.freightos.assignment;
 
 public class SnackVendingMachine extends VendingMachine<Snack> {
+    //This is the place where snacks are stored.
     private Inventory snackInventory;
 
     public SnackVendingMachine() {
@@ -12,6 +13,13 @@ public class SnackVendingMachine extends VendingMachine<Snack> {
         snackInventory.printSnackList();
     }
 
+    /**
+     * This method will return the snack if there is enough quantity of it
+     * else it will return null(0 amount of this snack)
+     *
+     * @param index snack slot index
+     * @return selected snack
+     */
     @Override
     public Snack selectItemAtSlot(int index) {
         if (snackInventory.isSnackAvailable(index)) {
@@ -20,6 +28,14 @@ public class SnackVendingMachine extends VendingMachine<Snack> {
         return null;
     }
 
+    /**
+     * This method will do payment either byCard or byCoin/notes
+     * and in case of successful payment,the machine will dispense snack and changes if any to customers.
+     *
+     * @param userChoice selected snack slot index
+     * @param price      price of the selected snack
+     * @return true or false represent if payment is success or not.
+     */
     @Override
     public boolean execute(int userChoice, double price) {
         if (doPayment(price)) {

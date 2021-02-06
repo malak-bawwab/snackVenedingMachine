@@ -6,7 +6,11 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class is responsible for snack operations:store,get,update,etc.
+ */
 public class Inventory {
+
     private Map<Integer, Snack> snackStore = new HashMap<>();
 
     public Inventory() {
@@ -21,12 +25,21 @@ public class Inventory {
         return snackStore.get(index).getQuantity() > 0;
     }
 
+    /**
+     * This method will deliver the selected snack to customer
+     *
+     * @param index selected snack slot index
+     */
     public void dispenseSnack(int index) {
         decrementQuantity(index);
         System.out.println("Please pick your snack " + snackStore.get(index).getName() + " Enjoy \uD83D\uDE01");
     }
 
-    public void fillSnackStore()  {
+    /**
+     * This method will iterate over all snacks in the snacks file located in resource folder
+     * and store them in the inventory
+     */
+    public void fillSnackStore() {
         ClassLoader classLoader = getClass().getClassLoader();
         int key = 0;
         File snackFile = new File(classLoader.getResource("snacks.txt").getPath());
@@ -42,6 +55,9 @@ public class Inventory {
         }
     }
 
+    /**
+     * This method displays snack list to customers.
+     */
     public void printSnackList() {
         int i;
         System.out.println("-------------------------------------------------------------");
