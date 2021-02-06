@@ -10,9 +10,13 @@ import java.util.*;
  * @author Malak
  */
 public class MoneyController {
+    //moneyStore will only be updated with success coin/Notes payment with no/sufficient change.
     private final Map<Double, Integer> moneyStore = new HashMap<>();
     private final List<CreditCard> cardList = new ArrayList<>();
+
+    //It will be updated whether payment success/not with no/sufficient/not sufficient change
     private Map<Double, Integer> localMoneyStore;
+    //contain all changes to return,Double is the money itself,Integer is the amount of this money.
     private Map<Double, Integer> totalChangeMap = new HashMap<>();
 
     public MoneyController() {
@@ -56,6 +60,7 @@ public class MoneyController {
         moneyStore.put(.20, 1);
         moneyStore.put(50.0, 1);
         moneyStore.put(20.0, 2);
+        //initially localMoneystore is a copy from moneyStore
         localMoneyStore = new HashMap<>(moneyStore);
     }
 
@@ -330,6 +335,7 @@ public class MoneyController {
                 amount = update(amount, .10);
             } else {
                 totalChangeMap.clear();
+                return;
             }
         }
     }

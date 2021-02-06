@@ -9,51 +9,71 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
+/**
+ * This test is used to test most of the Main application scenario.
+ */
 public class SnackVendingMachineApplicationTest {
 
     SnackVendingMachine snackVendingMachine = new SnackVendingMachine();
     private ClassLoader loader = SnackVendingMachineApplicationTest.class.getClassLoader();
 
+    /**
+     * This test will test most payWithCard scenarios,it will consider card_payment
+     * file((in resources) as an input to scanner,so instead of require console input
+     * from user,it will read them form the file.
+     *
+     * @throws FileNotFoundException
+     */
     @Test
     public void payWithCardTest() throws FileNotFoundException {
         snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("card_payment.txt").getPath()
         )));
-        //success payment with card,valid number,enough blance,
+
+        //case1 :success payment with card(valid number,enough balance).
+        //each time the test validate moneyStore,change returned,snack updated quantity.
         Snack selectedSnack = snackVendingMachine.selectItemAtSlot(0);
         assertTrue(snackVendingMachine.execute(0, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=15, 0.1=1, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertEquals(snackVendingMachine.getMoneyController().getTotalChangeMap().size(), 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //valid number,not enough payment then cancel,credit card
+        /*case 2:valid card number,not enough payment-> then user press cancel to refer to payment methods
+         and then press cancel.
+        */
         selectedSnack = snackVendingMachine.selectItemAtSlot(1);
         assertFalse(snackVendingMachine.execute(1, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=15, 0.1=1, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertEquals(snackVendingMachine.getMoneyController().getTotalChangeMap().size(), 0);
         assertTrue(selectedSnack.getQuantity() == 5);
 
-        //wrong then valid number,enough payment ,credit card
+        //case3:user enter wrong  card id multiple times then entered valid id(enough balance).
         selectedSnack = snackVendingMachine.selectItemAtSlot(2);
         assertTrue(snackVendingMachine.execute(2, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=15, 0.1=1, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertEquals(snackVendingMachine.getMoneyController().getTotalChangeMap().size(), 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //wrong  then cancel,credit card
+        /*case4:user enter wrong card id multiple times then entered cancel
+         to refer to payment method,then entered cancel.
+        */
         selectedSnack = snackVendingMachine.selectItemAtSlot(2);
         assertFalse(snackVendingMachine.execute(2, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=15, 0.1=1, 0.2=1, 20.0=2, 50.0=1}");
         Assert.assertEquals(snackVendingMachine.getMoneyController().getTotalChangeMap().size(), 0);
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //wrong  then cancel,choose coin
+        /*case5:user enter wrong card id multiple times then entered cancel
+         to refer to payment method,then choose pay with coin/Note
+        */
         selectedSnack = snackVendingMachine.selectItemAtSlot(8);
         assertTrue(snackVendingMachine.execute(8, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=18, 20.0=2, 50.0=1}");
         Assert.assertEquals("{0.1=1, 0.2=1}", snackVendingMachine.getMoneyController().getTotalChangeMap().toString());
         assertTrue(selectedSnack.getQuantity() == 4);
 
-        //valid number,not enough payment then coin,credit card
+        /*case 6:valid card number,not enough payment-> then user press cancel to
+        refer to payment methods,and choose pay with coin/notes.
+        */
         selectedSnack = snackVendingMachine.selectItemAtSlot(15);
         assertTrue(snackVendingMachine.execute(15, selectedSnack.getPrice()));
         Assert.assertEquals(snackVendingMachine.getMoneyController().getMoneyStore().toString(), "{1.0=19, 20.0=2, 50.0=1}");
