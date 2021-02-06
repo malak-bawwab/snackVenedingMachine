@@ -2,6 +2,11 @@ package com.freightos.assignment;
 
 import java.util.Scanner;
 
+/**
+ * This is a main class of SnackVendingMachine
+ *
+ * @author Malak
+ */
 public class SnackVendingMachineApplication {
     private static final String INCORRECT_CHOICE_NUMBER_MESSAGE = "Please enter a valid snack index";
     private static final Scanner scanner = new Scanner(System.in);

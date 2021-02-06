@@ -8,6 +8,8 @@ import java.util.Map;
 
 /**
  * This class is responsible for snack operations:store,get,update,etc.
+ *
+ * @author Malak
  */
 public class Inventory {
 

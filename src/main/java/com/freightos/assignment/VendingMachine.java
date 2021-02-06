@@ -4,6 +4,7 @@ package com.freightos.assignment;
  * This abstract class will define the basic operation of the vending machines.
  *
  * @param <T> is the item type,it is snack in case of snack vending machine.
+ * @author Malak
  */
 public abstract class VendingMachine<T> {
     private MoneyController moneyController = new MoneyController();
