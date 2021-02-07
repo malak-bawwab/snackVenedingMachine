@@ -38,11 +38,10 @@ public class Inventory {
     }
 
     /**
-     * This method will iterate over all snacks in the snacks file located in resource folder
+     * This method will iterate over all snacks in the snacks file
      * and store them into snackStore.
      */
     public void fillSnackStore() {
-        ClassLoader classLoader = getClass().getClassLoader();
         int key = 0;
         File snackFile = new File("snacks.txt");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(snackFile))) {

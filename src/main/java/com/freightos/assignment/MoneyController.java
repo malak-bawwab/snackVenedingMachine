@@ -34,11 +34,10 @@ public class MoneyController {
     }
 
     /**
-     * This method will iterate over all cards in the cards file located in resource folder
+     * This method will iterate over all cards in the cards file
      * and store them into the cardList.
      */
     private void fillCardList() {
-        ClassLoader classLoader = getClass().getClassLoader();
         File cardFile = new File("cards.txt");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(cardFile))) {
             String line;

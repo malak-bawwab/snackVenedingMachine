@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="com.freightos.assignment.SnackVendingMachineApplicationTest" time="0.287" errors="0" skipped="0">
+<testsuite tests="3" failures="0" name="com.freightos.assignment.SnackVendingMachineApplicationTest" time="0.176" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_261\jre\bin"/>
     <property name="java.vm.version" value="25.261-b12"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Machine"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Machine\snackVenedingMachine"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Machine"/>
+    <property name="user.dir" value="C:\Machine\snackVenedingMachine"/>
     <property name="java.runtime.version" value="1.8.0_261-b12"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_261\jre\lib\endorsed"/>
@@ -65,7 +65,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="soldOutTest" time="0.141"/>
-  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="payWithCoinTest" time="0.079"/>
-  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="payWithCardTest" time="0.067"/>
+  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="soldOutTest" time="0.084"/>
+  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="payWithCoinTest" time="0.05"/>
+  <testcase classname="com.freightos.assignment.SnackVendingMachineApplicationTest" name="payWithCardTest" time="0.042"/>
 </testsuite>
