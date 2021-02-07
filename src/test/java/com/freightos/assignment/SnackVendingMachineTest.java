@@ -8,8 +8,8 @@ public class SnackVendingMachineTest {
 
     @Test
     public void selectItemAtSlot() {
-        Assert.assertEquals("Twix",snackVendingMachine.selectItemAtSlot(0).getName());
-        Assert.assertEquals("KitKat",snackVendingMachine.selectItemAtSlot(1).getName());
+        Assert.assertEquals("Twix", snackVendingMachine.selectItemAtSlot(0).getName());
+        Assert.assertEquals("KitKat", snackVendingMachine.selectItemAtSlot(1).getName());
         Assert.assertNull(snackVendingMachine.selectItemAtSlot(9));
     }
 }

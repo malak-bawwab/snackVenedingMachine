@@ -2,8 +2,6 @@ package com.freightos.assignment;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class CreditCardTest {
     CreditCard card = new CreditCard("500az", 600);
 

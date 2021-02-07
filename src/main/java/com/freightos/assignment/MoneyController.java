@@ -14,9 +14,10 @@ public class MoneyController {
     private final Map<Double, Integer> moneyStore = new HashMap<>();
     private final List<CreditCard> cardList = new ArrayList<>();
 
-    //It will be updated whether payment success/not with no/sufficient/not sufficient change
+    //It will be updated whether payment success/not with no/sufficient/not sufficient change.
     private Map<Double, Integer> localMoneyStore;
-    //contain all changes to return,Double is the money itself,Integer is the amount of this money.
+
+    //contain all the change to return,Double is the money itself,Integer is the amount of this money.
     private Map<Double, Integer> totalChangeMap = new HashMap<>();
 
     public MoneyController() {
@@ -34,7 +35,7 @@ public class MoneyController {
 
     /**
      * This method will iterate over all cards in the cards file located in resource folder
-     * and store them in the cardList
+     * and store them into the cardList.
      */
     private void fillCardList() {
         ClassLoader classLoader = getClass().getClassLoader();
@@ -60,7 +61,8 @@ public class MoneyController {
         moneyStore.put(.20, 1);
         moneyStore.put(50.0, 1);
         moneyStore.put(20.0, 2);
-        //initially localMoneystore is a copy from moneyStore
+
+        //initially localMoneyStore is a copy from moneyStore
         localMoneyStore = new HashMap<>(moneyStore);
     }
 
@@ -85,7 +87,7 @@ public class MoneyController {
     }
 
     /**
-     * This method will check if card list contain customer creditCard.
+     * This method will check if the cardList contain customer creditCard.
      *
      * @param cardId customer creditCard.
      * @return true if card exists,false otherwise.
@@ -99,8 +101,8 @@ public class MoneyController {
     }
 
     /**
-     * This method will display payment method to customer,and will allow
-     * him to enter his prefered payment method ,and will execute the payment
+     * This method will display payment methods to customer,and will allow
+     * him to enter his preferred payment method ,and will execute the payment
      * based on the chosen payment method.
      *
      * @param keypad keypad of the snack vending machine.
@@ -115,7 +117,7 @@ public class MoneyController {
     }
 
     /**
-     * This method will format returned money to customer to be
+     * This method will format the returned money to customer to be
      * displayed in a readable format.
      *
      * @param returnedMoney moneyToReturn to customer,key is the money itself,value
@@ -134,7 +136,7 @@ public class MoneyController {
     }
 
     /**
-     * This method will add all the money entered by the customer and return one accumlated value.
+     * This method will add all the money entered by the customer and return one accumulated value.
      *
      * @param enteredMoneyMap the money entered by the customer,where key is the money itself
      *                        value is the count of this money.
@@ -155,7 +157,7 @@ public class MoneyController {
      * @param keypad        keypad of the SnackVendingMachine.
      * @param paymentChoice customer preferred payment method.
      * @param price         price of selected snack.
-     * @return true if payment process is successfull,false otherwise.
+     * @return true if payment process is successful,false otherwise.
      */
     private boolean executePaymentMethod(Keypad keypad, int paymentChoice, double price) {
         switch (paymentChoice) {
@@ -189,8 +191,8 @@ public class MoneyController {
                 -if customer entered unaccepted money,machine will not accept them and
                 will return the unaccepted money to customer and wil ask the customer to enter valid money.
                 -if payment is not sufficient,machine will forward customer to payment
-                method and return the money he entered.
-                -if there is no sufficent change,machine will ask customer to choose another sanck.
+                methods and return the money he entered.
+                -if there is no sufficient change,machine will ask customer to choose another snack.
                  */
             case 2:
                 /*to store customer entered money,key is the money itself,value
@@ -202,10 +204,10 @@ public class MoneyController {
                         "When you finish please press ENTER\n");
                 while (true) {
                     String money = keypad.read();
-                    //if customer press enter-->he finish insert money to the machine.
+                    //if customer press enter-->he finish inserting money to the machine.
                     if (money.equals("")) {
                         totalChangeMap.clear();
-                        //if money entered by customer >snack price,calculate change if any.
+                        //if money entered by customer > snack price,calculate change if any exists.
                         if (getAccumulatedMoney(enteredMoneyMap).compareTo(BigDecimal.valueOf(price)) >= 0) {
                             return collectChange(enteredMoneyMap, price);
                         }
@@ -245,7 +247,7 @@ public class MoneyController {
     }
 
     /**
-     * This method will check  dispense changes to custom if any exists.
+     * This method will dispense changes to custom if any exists.
      */
     public void dispenseChange() {
         if (totalChangeMap.size() == 0) {
@@ -258,12 +260,12 @@ public class MoneyController {
     }
 
     /**
-     * This method will call updateTotalChangeMap in case accumulatedMoney>price.
+     * This method will call updateTotalChangeMap in case accumulatedMoney >price.
      *
-     * @param enteredMoneyMap enterd money by the customer,key is the money itself
+     * @param enteredMoneyMap entered money by the customer,key is the money itself
      *                        value is the count of the money.
      * @param price           selected snack price.
-     * @return true if there is changes ,flase if no change/no sufficent change.
+     * @return false if there is no sufficient change.
      */
     private boolean collectChange(Map<Double, Integer> enteredMoneyMap, double price) {
         BigDecimal balance = getAccumulatedMoney(enteredMoneyMap);
@@ -310,10 +312,10 @@ public class MoneyController {
 
     /**
      * This method will use greedy algorithm to check if there is a sufficient change
-     * or not.If yes,it will updated totalChangeMap(represent change amount with
+     * or not.If yes,it will update totalChangeMap(represent change amount with
      * machine accepted money).
      *
-     * @param amount is the change(accumlated-amount).
+     * @param amount is the change(accumulated - amount).
      */
     private void updateTotalChangeMap(BigDecimal amount) {
         while (amount.compareTo(BigDecimal.valueOf(0)) > 0) {

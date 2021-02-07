@@ -3,7 +3,7 @@ package com.freightos.assignment;
 import java.util.Scanner;
 
 /**
- * This is a main class of SnackVendingMachine
+ * This is a main class of SnackVendingMachine.
  *
  * @author Malak
  */

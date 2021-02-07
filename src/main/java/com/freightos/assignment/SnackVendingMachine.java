@@ -14,7 +14,7 @@ public class SnackVendingMachine extends VendingMachine<Snack> {
     }
 
     /**
-     * This method will return the snack if there is enough quantity of it
+     * This method will return the snack if there is enough from it
      * else it will return null(0 amount of this snack)
      *
      * @param index snack slot index
@@ -30,7 +30,8 @@ public class SnackVendingMachine extends VendingMachine<Snack> {
 
     /**
      * This method will do payment either byCard or byCoin/notes
-     * and in case of successful payment,the machine will dispense snack and changes if any to customers.
+     * and in case of successful payment,the machine will dispense snack and changes if any exists
+     * to customers.
      *
      * @param userChoice selected snack slot index
      * @param price      price of the selected snack

@@ -1,7 +1,7 @@
 package com.freightos.assignment;
 
 /**
- * This abstract class will define the basic operation of the vending machines.
+ * This abstract class will define the basic operations of the vending machines.
  *
  * @param <T> is the item type,it is snack in case of snack vending machine.
  * @author Malak

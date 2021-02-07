@@ -28,7 +28,7 @@ public class Inventory {
     }
 
     /**
-     * This method will deliver the selected snack to customer
+     * This method will deliver the selected snack to customer.
      *
      * @param index selected snack slot index
      */
@@ -39,7 +39,7 @@ public class Inventory {
 
     /**
      * This method will iterate over all snacks in the snacks file located in resource folder
-     * and store them in the inventory
+     * and store them into snackStore.
      */
     public void fillSnackStore() {
         ClassLoader classLoader = getClass().getClassLoader();
