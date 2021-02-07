@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
 public class SnackVendingMachineApplicationTest {
 
     SnackVendingMachine snackVendingMachine = new SnackVendingMachine();
-    private ClassLoader loader = SnackVendingMachineApplicationTest.class.getClassLoader();
 
     /**
      * This test will test most payWithCard scenarios,it will consider card_payment
@@ -26,8 +25,7 @@ public class SnackVendingMachineApplicationTest {
      */
     @Test
     public void payWithCardTest() throws FileNotFoundException {
-        snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("card_payment.txt").getPath()
-        )));
+        snackVendingMachine.getKeypad().addScanner(new Scanner(new File("card_payment_test.txt")));
 
         //case1 :success payment with card(valid number,enough balance).
         //each time the test validate moneyStore,change returned,snack updated quantity.
@@ -89,8 +87,7 @@ public class SnackVendingMachineApplicationTest {
      */
     @Test
     public void payWithCoinTest() throws FileNotFoundException {
-        snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("coin_paymet.txt").getPath()
-        )));
+        snackVendingMachine.getKeypad().addScanner(new Scanner(new File("coin_paymet_test.txt")));
 
         //case1 :successful payment with money no change returned,all entered money are accepted.
         //each time the test validate moneyStore,change returned,snack updated quantity.
@@ -146,8 +143,7 @@ public class SnackVendingMachineApplicationTest {
      */
     @Test
     public void soldOutTest() throws FileNotFoundException {
-        snackVendingMachine.getKeypad().addScanner(new Scanner(new File(loader.getResource("sold_out.txt").getPath()
-        )));
+        snackVendingMachine.getKeypad().addScanner(new Scanner(new File("sold_out_test.txt")));
         Snack selectedSnack = snackVendingMachine.selectItemAtSlot(6);
         assertTrue(snackVendingMachine.execute(6, selectedSnack.getPrice()));
         assertTrue(selectedSnack.getQuantity() == 1);
