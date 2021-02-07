@@ -44,7 +44,7 @@ public class Inventory {
     public void fillSnackStore() {
         ClassLoader classLoader = getClass().getClassLoader();
         int key = 0;
-        File snackFile = new File(classLoader.getResource("snacks.txt").getPath());
+        File snackFile = new File("snacks.txt");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(snackFile))) {
             String line;
             String[] splitLine;

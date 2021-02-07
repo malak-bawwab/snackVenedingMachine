@@ -39,7 +39,7 @@ public class MoneyController {
      */
     private void fillCardList() {
         ClassLoader classLoader = getClass().getClassLoader();
-        File cardFile = new File(classLoader.getResource("cards.txt").getPath());
+        File cardFile = new File("cards.txt");
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(cardFile))) {
             String line;
             String[] splitLine;
