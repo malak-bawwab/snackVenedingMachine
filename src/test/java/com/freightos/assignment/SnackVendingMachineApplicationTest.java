@@ -17,8 +17,8 @@ public class SnackVendingMachineApplicationTest {
     SnackVendingMachine snackVendingMachine = new SnackVendingMachine();
 
     /**
-     * This test will test most payWithCard scenarios,it will consider card_payment
-     * file((in resources) as an input to scanner,so instead of require console input
+     * This test will test most payWithCard scenarios,it will consider card_payment_test
+     * file as an input to scanner,so instead of require console input
      * from user,it will read them form the file.
      *
      * @throws FileNotFoundException
@@ -79,8 +79,8 @@ public class SnackVendingMachineApplicationTest {
     }
 
     /**
-     * This test will test most payWithCoin/notes scenarios,it will consider coin_payment
-     * file((in resources) as an input to scanner,so instead of require console input
+     * This test will test most payWithCoin/notes scenarios,it will consider coin_payment_test
+     * file as an input to scanner,so instead of require console input
      * from user,it will read them form the file.
      *
      * @throws FileNotFoundException
@@ -135,8 +135,8 @@ public class SnackVendingMachineApplicationTest {
     }
 
     /**
-     * This test will test most snack soldOut scenarios,it will consider sold_out
-     * file((in resources) as an input to scanner,so instead of require console input
+     * This test will test most snack soldOut scenarios,it will consider sold_out_test
+     * file as an input to scanner,so instead of require console input
      * from user,it will read them form the file.
      *
      * @throws FileNotFoundException

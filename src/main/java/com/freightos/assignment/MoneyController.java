@@ -246,7 +246,7 @@ public class MoneyController {
     }
 
     /**
-     * This method will dispense changes to custom if any exists.
+     * This method will dispense changes to customer if any exists.
      */
     public void dispenseChange() {
         if (totalChangeMap.size() == 0) {
